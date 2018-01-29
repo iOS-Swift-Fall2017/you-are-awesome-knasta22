@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,26 +24,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxp-mf-NMf">
-                                <rect key="frame" x="28" y="20" width="319" height="77"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCt-9B-23V">
-                                <rect key="frame" x="121" y="105" width="132" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCt-9B-23V">
+                                <rect key="frame" x="121" y="105" width="133" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="dpQ-8d-1zj"/>
+                                </constraints>
                                 <state key="normal" title="Show Message"/>
                                 <connections>
                                     <action selector="showMessagePress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Ze-Vy-ItK"/>
                                 </connections>
                             </button>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image0" translatesAutoresizingMaskIntoConstraints="NO" id="fbd-ud-db9">
+                                <rect key="frame" x="28" y="156" width="320" height="444"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxp-mf-NMf">
+                                <rect key="frame" x="28" y="13" width="320" height="77"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="77" id="lqa-iY-bT8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
+                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="mxp-mf-NMf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="28" id="0Sg-t2-7a2"/>
+                            <constraint firstItem="mxp-mf-NMf" firstAttribute="leading" secondItem="fbd-ud-db9" secondAttribute="leading" id="IMH-WR-1pH"/>
+                            <constraint firstItem="NCt-9B-23V" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R2P-qr-8aH"/>
+                            <constraint firstItem="mxp-mf-NMf" firstAttribute="trailing" secondItem="fbd-ud-db9" secondAttribute="trailing" id="ZKO-pK-TSX"/>
+                            <constraint firstItem="NCt-9B-23V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="121" id="aZC-NQ-PIJ"/>
+                            <constraint firstItem="NCt-9B-23V" firstAttribute="top" secondItem="mxp-mf-NMf" secondAttribute="bottom" constant="15" id="c2D-1O-Rr2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fbd-ud-db9" secondAttribute="bottom" constant="67" id="inS-xJ-mWh"/>
+                            <constraint firstItem="fbd-ud-db9" firstAttribute="top" secondItem="NCt-9B-23V" secondAttribute="bottom" constant="8" symbolic="YES" id="reT-R2-inM"/>
+                            <constraint firstItem="mxp-mf-NMf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-7" id="t2i-uM-jel"/>
+                            <constraint firstItem="mxp-mf-NMf" firstAttribute="centerX" secondItem="NCt-9B-23V" secondAttribute="centerX" id="xJ7-14-jRd"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="awesomeImage" destination="fbd-ud-db9" id="lcW-QX-bXZ"/>
                         <outlet property="messageLabel" destination="mxp-mf-NMf" id="SeH-Ua-gz6"/>
                     </connections>
                 </viewController>
@@ -51,4 +72,7 @@
             <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="image0" width="475" height="633"/>
+    </resources>
 </document>
