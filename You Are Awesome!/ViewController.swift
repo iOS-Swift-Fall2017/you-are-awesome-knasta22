@@ -10,9 +10,11 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController {
-
+    //MARK: - outlets
     @IBOutlet weak var awesomeImage: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var soundSwitch: UISwitch!
+    
     var awesomePlayer = AVAudioPlayer()
     var index = 0
     var imageNumber = -1
@@ -20,18 +22,19 @@ class ViewController: UIViewController {
     let numberOfImages = 4
     let numberOfSounds = 4
     
-    // code below executes when the app's view first loads
+    // this code executes when the view controller loads
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    func playSound(soundName: String) {
+    
+    //MARK: - my own functions
+    func playSound(soundName: String, audioPlayer: inout AVAudioPlayer) {
         //can we load in the file soundName
         if let sound = NSDataAsset(name: soundName) {
             // check if sound.data is a sound file
             do {
-                try awesomePlayer = AVAudioPlayer(data: sound.data)
-                awesomePlayer.play()
+                try audioPlayer = AVAudioPlayer(data: sound.data)
+                audioPlayer.play()
             } catch {
                 // if sound.data is not a valid audio file
                 print("ERROR: data in \(soundName) couldn't be played as a sound")
@@ -50,8 +53,18 @@ class ViewController: UIViewController {
         return newIndex
     }
     
-    @IBAction func showMessagePress(_ sender: UIButton) {
-        
+    //MARK: - actions
+    
+    @IBAction func soundSwitchPressed(_ sender: UISwitch) {
+            if !soundSwitch.isOn {
+                if soundNumber != -1 {
+                    //stop playing
+                    awesomePlayer.stop()
+                }
+            }
+        }
+    
+    @IBAction func showMessagePressed(_ sender: UIButton) {
         let messages = ["You Are Fantastic!",
                         "You Are Great!",
                         "You Are Amazing!",
@@ -59,24 +72,29 @@ class ViewController: UIViewController {
                         "You Brighten My Day!",
                         "You Are Da Bomb!",
                         "I can't wait to use your app!",
-        "Fabulous? that's you!"]
-
-        var newIndex = -1
+                        "Fabulous? that's you!"]
+        
         
         // show a message
         index = nonRepeatingRandom(lastNumber: index, maxValue: messages.count)
         messageLabel.text = messages[index]
         
-        // show an image
+        // show an image`
         awesomeImage.isHidden = false //show the image
         imageNumber = nonRepeatingRandom(lastNumber: imageNumber, maxValue: numberOfImages)
         awesomeImage.image = UIImage(named: "image\(imageNumber)")
         
-        // get a random number to use in our soundName file
-        soundNumber = nonRepeatingRandom(lastNumber: soundNumber, maxValue: numberOfSounds)
+        if soundSwitch.isOn {
+            // get a random number to use in our soundName file
+            soundNumber = nonRepeatingRandom(lastNumber: soundNumber, maxValue: numberOfSounds)
+            
+            // play a sound
+            let soundName = "sound\(soundNumber)"
+            playSound(soundName: soundName, audioPlayer: &awesomePlayer)
+        }
         
-        // play a sound
-        let soundName = "sound\(soundNumber)"
-        playSound(soundName: soundName)
     }
+    
 }
+
+ 
